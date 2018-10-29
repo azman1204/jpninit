@@ -1,4 +1,9 @@
 <?php
+Route::get('/todo/list', 'TodoController@listing');
+
+
+
+
 // URL with parameter (data). see ms 45
 // http://localhost:8888/jpninit/public/user/123
 Route::get('/user/{id}', function($id) {

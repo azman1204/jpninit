@@ -1,0 +1,23 @@
+#wrapper {
+    border: 10px solid green;
+}
+
+#header {
+    height: 50px;
+    background-color: #ffffcc;
+}
+
+#menu {
+    height: 24px;
+    background-color: tomato;
+}
+
+#body {
+    padding: 10px;
+}
+
+#footer {
+    height: 30px;
+    background-color: tomato;
+}
+
