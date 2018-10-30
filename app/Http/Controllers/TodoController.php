@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Todolist;
+use Illuminate\Http\Request;
 
 class TodoController extends Controller {
     // senaraikan semua todo list
@@ -10,4 +11,40 @@ class TodoController extends Controller {
         //dd($td); // die dump
         return view('todo/list', compact('td'));
     }
+    
+    // show form
+    function show() {
+        $td = new Todolist();
+        return view('todo/form', compact('td')); // resources/views/todo/form.blade.php
+    }
+    
+    // save / update form
+    function save(Request $req) {
+        // baca input dari form
+        $id = $req->input('id');
+        $name = $req->input('name');
+        $desc = $req->input('description');
+        
+        if (empty($id)) {
+            // insert
+            $td = new Todolist();
+        } else {
+            // update
+            $td = Todolist::find($id);
+        }
+        
+        $td->name = $name;
+        $td->description = $desc;
+        $td->save();
+        return redirect('todo/list');
+        //return "$name $desc";
+    }
+    
+    // edit form
+    function edit($id) {
+        $td = Todolist::find($id);
+        return view('todo/form', compact('td'));
+    }
+    
+    // delete data
 }
