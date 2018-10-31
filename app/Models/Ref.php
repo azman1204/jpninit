@@ -5,15 +5,16 @@ class Ref extends Model {
     protected $table = 'ref';
     
     // generate dropdown html
-    static function dropdown($cat = 'cms') {
+    static function dropdown($cat = 'cms', $name='') {
         $refs = self::where('cat', $cat)->get();
-        $str = '<select name="">';
+        $str = "<select name='$name' id='$name'>";
         foreach($refs as $ref) {
             $str .= "<option value='{$ref->code}'>{$ref->descr}</option>";
         }
-        $str = '</select>';
+        $str .= '</select>';
         return $str;
     }
+    
     // validation rules
     static function rules() {
         return [
