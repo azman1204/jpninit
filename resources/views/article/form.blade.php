@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col-md-1">Kandungan</div>
         <div class="col-md-11">
-            <textarea name="content" class="form-control">{{ $art->content }}</textarea>
+            <textarea id="editor" name="content">{{ $art->content }}</textarea>
         </div>
     </div>
     <div class="row">
@@ -33,4 +33,19 @@
         </div>
     </div>
 </form>
+<script src="https://cdn.ckeditor.com/ckeditor5/11.1.1/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+
+<style>
+.ck-editor__editable {
+    min-height: 200px;
+}
+</style>
+
 @endsection

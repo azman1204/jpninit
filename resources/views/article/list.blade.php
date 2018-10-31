@@ -17,7 +17,10 @@
             <td>{{ $loop->iteration }}</td>
             <td>{{ $art->title }}</td>
             <td>{{ $art->created_at }}</td>
-            <td>Edit | Delete</td>
+            <td>
+                <a class="btn btn-success btn-sm" href="{{ url('article/edit/'.$art->id) }}">Edit</a>
+                <a class="btn btn-danger btn-sm" href="{{ url('article/delete/'.$art->id) }}">Delete</a>
+            </td>
         </tr>
         @endforeach
     </tbody>
