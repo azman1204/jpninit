@@ -14,12 +14,14 @@ class ArticleController extends Controller
     
     // form
     function show() {
-        return view('article/form');
+        $art = new Article();
+        return view('article/form', compact('art'));
     }
     
     // edit
     function edit($id) {
-        return view('article/form');
+        $art = Article::find($id);
+        return view('article/form', compact('art'));
     }
     
     // save
@@ -41,7 +43,7 @@ class ArticleController extends Controller
         // validation
         $v = Validator::make($req->all(), Article::rules(), Article::messages());
         if ($v->fails()) {
-            return view('form', compact('art'))->withErrors($v);
+            return view('article/form', compact('art'))->withErrors($v);
         }
         
         $art->save();
