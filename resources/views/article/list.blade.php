@@ -1,8 +1,9 @@
 @extends('app')
 @section('content')
 <legend>Senarai Artikel</legend>
+<a href="{{ url('article/show') }}" class="btn btn-primary btn-sm">Tambah Article</a>
 <table class="table table-bordered">
-    <thead>
+    <thead class="thead-dark">
     <tr>
         <th>Bil.</th>
         <th>Tajuk</th>
