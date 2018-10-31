@@ -3,6 +3,7 @@ Route::get('/todo/list', 'TodoController@listing');
 Route::get('/todo/show', 'TodoController@show');
 Route::post('/todo/save', 'TodoController@save');
 Route::get('/todo/edit/{id}', 'TodoController@edit');
+Route::get('/todo/delete/{id}', 'TodoController@delete');
 
 
 

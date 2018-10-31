@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Todolist;
 use Illuminate\Http\Request;
+use Validator;
 
 class TodoController extends Controller {
     // senaraikan semua todo list
@@ -35,6 +36,13 @@ class TodoController extends Controller {
         
         $td->name = $name;
         $td->description = $desc;
+        
+        // validation .. data dari form vs rules
+        $v = Validator::make($req->all(), Todolist::rules(), Todolist::messages());
+        if ($v->fails()) {
+            return view('todo/form', compact('td'))->withErrors($v);
+        }
+        
         $td->save();
         return redirect('todo/list');
         //return "$name $desc";
@@ -47,4 +55,9 @@ class TodoController extends Controller {
     }
     
     // delete data
+    function delete($id) {
+        $td = Todolist::find($id);
+        $td->delete();
+        return redirect('todo/list');
+    }
 }
