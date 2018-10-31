@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers;
-use App\Todolist;
+use App\Models\Todolist;
 use Illuminate\Http\Request;
 use Validator;
 

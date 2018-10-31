@@ -7,7 +7,8 @@
         <script src="{{ asset('jquery-ui-1.12.1/external/jquery/jquery.js') }}"></script>
         <script src="{{ asset('jquery-ui-1.12.1/jquery-ui.js') }}"></script>
         <link href="{{ asset('jquery-ui-1.12.1/jquery-ui.css') }}" rel="stylesheet" type="text/css"/>
-        </head>
+        <script src="{{ asset('bootstrap-4.1.3/js/bootstrap.js') }}"></script>
+    </head>
         <body>
         <div id="wrapper">
         <div id="header"></div>
