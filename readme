@@ -10,3 +10,10 @@ CREATE TABLE `myjpn`.`articles` (
   PRIMARY KEY (`id`)
 );
 
+CREATE TABLE `myjpn`.`ref` (  
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `cat` VARCHAR(20),
+  `code` VARCHAR(20),
+  `descr` VARCHAR(100),
+  PRIMARY KEY (`id`)
+);
