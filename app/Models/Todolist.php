@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace App\Models;
 // satu model mewakili satu table
 use Illuminate\Database\Eloquent\Model; // import library
 class Todolist extends Model {

@@ -1,4 +1,11 @@
 <?php
+Route::get('/article/list', 'ArticleController@listing');
+Route::get('/article/show', 'ArticleController@show');
+Route::post('/article/save', 'ArticleController@save');
+Route::get('/article/edit/{id}', 'ArticleController@edit');
+Route::get('/article/delete/{id}', 'ArticleController@delete');
+
+
 Route::get('/todo/list', 'TodoController@listing');
 Route::get('/todo/show', 'TodoController@show');
 Route::post('/todo/save', 'TodoController@save');
