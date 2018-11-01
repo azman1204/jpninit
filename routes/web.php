@@ -1,4 +1,15 @@
 <?php
+use Illuminate\Support\Facades\Hash;
+// generate password
+Route::get('pwd', function() {
+   echo Hash::make('1234'); 
+});
+
+Route::get('login', 'LoginController@login');
+Route::get('logout', 'LoginController@logout');
+Route::post('auth', 'LoginController@auth');
+
+
 Route::get('/article/list', 'ArticleController@listing');
 Route::get('/article/show', 'ArticleController@show');
 Route::post('/article/save', 'ArticleController@save');
