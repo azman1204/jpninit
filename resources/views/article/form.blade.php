@@ -29,7 +29,7 @@
     <div class="row">
         <div class="col-md-1">Kategori</div>
         <div class="col-md-11">
-            {!! App\Models\Ref::dropdown('cms', 'cat') !!}
+            {!! App\Models\Ref::dropdown('cms', 'cat', $art->cat) !!}
         </div>
     </div>
     <div class="row">

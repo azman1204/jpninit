@@ -15,7 +15,8 @@ class LoginController extends Controller {
 
     // log out
     function logout() {
-        
+        Auth::logout();
+        return redirect('login');
     }
 
     // athenticate user id and pwd
