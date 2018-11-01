@@ -27,6 +27,12 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-md-1">Kategori</div>
+        <div class="col-md-11">
+            {!! App\Models\Ref::dropdown('cms', 'cat') !!}
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-4">
             <input type="submit" value="Simpan" class="btn btn-primary">
