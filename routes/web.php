@@ -3,8 +3,14 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 // generate password
 Route::get('pwd', function() {
-   echo Hash::make('1234'); 
+   echo  base64_encode(sha1('1234', true));
+   //echo Hash::make('1234'); 
 });
+
+Route::get('home2', function() {
+   dd(Auth::user());
+});
+
 
 // middleware = prog. yg run sebelum execute intended prog
 // web middleware - check user logged-in or not
@@ -23,12 +29,15 @@ Route::middleware(['auth'])->group(function() {
     Route::post('/todo/save', 'TodoController@save');
     Route::get('/todo/edit/{id}', 'TodoController@edit');
     Route::get('/todo/delete/{id}', 'TodoController@delete');
+    
+    Route::get('/edoc/list/{id?}', 'EdocController@listing');
 });
 
 
 Route::get('login', 'LoginController@login')->name('login');
 Route::get('logout', 'LoginController@logout');
 Route::post('auth', 'LoginController@auth');
+Route::get('login2', 'LoginController@auth2');
 
 // URL with parameter (data). see ms 45
 // http://localhost:8888/jpninit/public/user/123

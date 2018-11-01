@@ -1,4 +1,4 @@
 @extends('app')
 @section('content')
-<legend>Welcome {{ $user->name }}</legend>
+<legend>Welcome {{ $user->nama }}</legend>
 @endsection
