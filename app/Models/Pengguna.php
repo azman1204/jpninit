@@ -6,12 +6,14 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Pengguna extends Authenticatable
-{
+class Pengguna extends Authenticatable {
+
     use Notifiable;
+
     protected $connection = 'mysql2';
     protected $table = 'tb_pengguna';
-    protected $primary_key = 'id_pengguna';
+    protected $primaryKey = 'id_pengguna';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -29,4 +31,9 @@ class Pengguna extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function username() {
+        return 'nokp';
+    }
+
 }

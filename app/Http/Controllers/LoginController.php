@@ -39,8 +39,15 @@ class LoginController extends Controller {
                 ->where('katalaluan',$pwd)->first();
         if ($p) {
             echo 'ok';
-            Auth::login($p);
-            return redirect('home2');
+            //Auth::guard('abc');
+            //if (Auth::guard('abc')->attempt(['nokp'=>'1234'])) {
+                Auth::guard('abc')->login($p);
+                //var_dump(Auth::guard('abc')->check());
+                //var_dump(Auth::guard('abc')->user());exit;
+                return redirect('home2');
+            //} else {
+            //    echo 'login prob';
+            //}
         } else {
             echo 'ko';
         }

@@ -1,14 +1,12 @@
 <?php
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+
 // generate password
 Route::get('pwd', function() {
-   echo  base64_encode(sha1('1234', true));
-   //echo Hash::make('1234'); 
-});
-
-Route::get('home2', function() {
-   dd(Auth::user());
+    echo base64_encode(sha1('1234', true));
+    //echo Hash::make('1234'); 
 });
 
 
@@ -22,27 +20,35 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/article/delete/{id}', 'ArticleController@delete');
     //Route::view('home', 'login.home');
     Route::get('home', function() {
-        return view('login.home',['user' => Auth::user()]);
+        return view('login.home', ['user' => Auth::user()]);
     });
     Route::get('/todo/list', 'TodoController@listing');
     Route::get('/todo/show', 'TodoController@show');
     Route::post('/todo/save', 'TodoController@save');
     Route::get('/todo/edit/{id}', 'TodoController@edit');
     Route::get('/todo/delete/{id}', 'TodoController@delete');
-    
     Route::get('/edoc/list/{id?}', 'EdocController@listing');
 });
 
+Route::middleware(['web'])->group(function() {
+    Route::get('home2', function() {
+        Auth::guard('abc');
+        var_dump(Auth::guard('abc')->check());
+        var_dump(Auth::id());
+        var_dump(Auth::guard('abc')->user());
+    });
+    Route::get('login2', 'LoginController@auth2');
+});
 
 Route::get('login', 'LoginController@login')->name('login');
 Route::get('logout', 'LoginController@logout');
 Route::post('auth', 'LoginController@auth');
-Route::get('login2', 'LoginController@auth2');
+
 
 // URL with parameter (data). see ms 45
 // http://localhost:8888/jpninit/public/user/123
 Route::get('/user/{id}', function($id) {
- return "User ID = $id";
+    return "User ID = $id";
 });
 
 // http://localhost:8888/jpninit/public/sample/first
@@ -63,7 +69,7 @@ Route::get('/hello/abc', function() {
 // kes #2
 // http://localhost:8888/jpninit/public/hola
 Route::get('hola', function() {
- return view('hola'); // /resources/views/hola.blade.php
+    return view('hola'); // /resources/views/hola.blade.php
 });
 
 // kes #2

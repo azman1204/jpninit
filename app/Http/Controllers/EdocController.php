@@ -12,17 +12,18 @@ class EdocController extends Controller
     function listing($id = '') {
         if(empty($id)) {
             $cats = EdocCat::whereNull('parent_id')->get();
+            return view('edoc/list', compact('cats','id'));
         } else {
             $cats = EdocCat::where('parent_id', $id)->get();
             if (count($cats) > 0) {
                 // ada child
+                return view('edoc/list', compact('cats','id'));
             } else {
                 // tak ada child / senarai docs
                 $docs = Edoc::where('id_cat', $id)->get();
-                return view('edoc/list', compact('docs'));
+                return view('edoc/list', compact('docs','cats'.'id'));
             }
         }
-        return view('edoc/list', compact('cats'));
     }
     
     // form
