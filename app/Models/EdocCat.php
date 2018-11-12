@@ -5,16 +5,14 @@ class EdocCat extends Model {
     // validation rules
     static function rules() {
         return [
-            'title' => 'required',
-            'content' => 'required'
+            'name' => 'required'
         ];
     }
     
     // custom err messages
     static function messages() {
         return [
-            'title.required' => 'Tajuk wajib diisi',
-            'content.required' => 'Kandungan wajib diisi juga'
+            'name.required' => 'Tajuk wajib diisi'
         ];
     }
 }

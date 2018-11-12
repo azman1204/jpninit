@@ -1,8 +1,16 @@
 @extends('app')
 @section('content')
 <legend>Senarai E-Dokumen</legend>
-<a href="{{ url('edoc/doc') }}" class="btn btn-primary btn-sm">Tambah Dok</a>
-<a href="{{ url('edoc/folder/'.$id) }}" class="btn btn-primary btn-sm">Tambah Folder</a>
+
+@if ((count($cats) == 0 && count($docs) == 0) || count($cats) > 0)
+    <!-- belum ada folder dan belum ada doc OR sudah ada folder -->
+    <a href="{{ url('edoc/folder/'.$id) }}" class="btn btn-primary btn-sm">Tambah Folder</a>
+@endif
+
+@if (count($cats) == 0)
+    <a href="{{ url('edoc/doc') }}" class="btn btn-primary btn-sm">Tambah Dok</a>
+@endif
+
 <table class="table table-bordered">
     <!-- list kan semua folder (cat) --->
     @if (count($cats) > 0)

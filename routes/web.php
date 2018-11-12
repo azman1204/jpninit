@@ -27,7 +27,12 @@ Route::middleware(['auth'])->group(function() {
     Route::post('/todo/save', 'TodoController@save');
     Route::get('/todo/edit/{id}', 'TodoController@edit');
     Route::get('/todo/delete/{id}', 'TodoController@delete');
+    
     Route::get('/edoc/list/{id?}', 'EdocController@listing');
+    // display form add new folder
+    Route::get('/edoc/folder/{id?}', 'EdocController@folder');
+    // save form add new folder
+    Route::post('/edoc/folder', 'EdocController@SaveFolder');
 });
 
 Route::middleware(['web'])->group(function() {
