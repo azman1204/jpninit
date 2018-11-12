@@ -9,6 +9,18 @@ use Illuminate\Support\Facades\Auth;
 use Validator;
 
 class EdocController extends Controller {
+    function editFolder($id) {
+        $cat = EdocCat::find($id);
+        $id = $cat->parent_id;
+        return view('edoc/folder', compact('cat', 'id'));
+    }
+    
+    function deleteFolder($id) {
+        $cat = EdocCat::find($id);
+        $cat->delete();
+        return redirect('edoc/list/'.$cat->parent_id);
+    }
+    
     // show add new folder form
     // $id = parent folder id
     function folder($id='') {

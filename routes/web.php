@@ -33,6 +33,16 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/edoc/folder/{id?}', 'EdocController@folder');
     // save form add new folder
     Route::post('/edoc/folder', 'EdocController@SaveFolder');
+    // edit folder
+    Route::get('/edoc/edit/{id}', 'EdocController@EditFolder');
+    // delete folder
+    Route::get('/edoc/delete/{id}', 'EdocController@DeleteFolder');
+    
+    // add new doc
+    Route::get('/doc/form/{id_cat}', 'DocController@form');
+    Route::post('/doc/save', 'DocController@save');
+    Route::get('/doc/edit/{$id}', 'DocController@edit');
+    Route::get('/doc/delete/{$id}', 'DocController@delete');
 });
 
 Route::middleware(['web'])->group(function() {

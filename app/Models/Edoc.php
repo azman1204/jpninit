@@ -5,16 +5,17 @@ class Edoc extends Model {
     // validation rules
     static function rules() {
         return [
-            'title' => 'required',
-            'content' => 'required'
+            'name' => 'required',
+            'descr' => 'required',
+            'id_cat' => 'required'
         ];
     }
     
     // custom err messages
     static function messages() {
         return [
-            'title.required' => 'Tajuk wajib diisi',
-            'content.required' => 'Kandungan wajib diisi juga'
+            'name.required' => 'Nama wajib diisi',
+            'descr.required' => 'Keterangan wajib diisi juga'
         ];
     }
 }

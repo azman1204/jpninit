@@ -14,6 +14,9 @@
         <a class="nav-link" href="{{ url('todo/list') }}">Todolist</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="{{ url('edoc/list') }}">eDoc</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="{{ url('article/list') }}">Artikel</a>
       </li>
       

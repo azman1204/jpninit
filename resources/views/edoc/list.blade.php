@@ -8,7 +8,7 @@
 @endif
 
 @if (count($cats) == 0)
-    <a href="{{ url('edoc/doc') }}" class="btn btn-primary btn-sm">Tambah Dok</a>
+    <a href="{{ url('doc/form/'.$id) }}" class="btn btn-primary btn-sm">Tambah Dok</a>
 @endif
 
 <table class="table table-bordered">
@@ -17,7 +17,13 @@
     <tbody>
         @foreach($cats as $cat)
         <tr>
-            <td><a href="{{ url('edoc/list/'.$cat->id) }}">{{ $cat->name }}</a></td>
+            <td><span class="fa fa-folder fa-2x"></span> <a href="{{ url('edoc/list/'.$cat->id) }}">{{ $cat->name }}</a></td>
+            @if (App\Models\Role::isPriv(1))
+            <td>
+                <a href="{{ url('edoc/edit/'.$cat->id) }}" class="fa fa-edit"></a>
+                <a href="{{ url('edoc/delete/'.$cat->id) }}" onclick="return confirm('Anda Pasti ?')" class="fa fa-trash-alt" style="color:red"></a>
+            </td>
+            @endif
         </tr>
         @endforeach
     </tbody>
