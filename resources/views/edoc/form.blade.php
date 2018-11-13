@@ -22,6 +22,7 @@
         <div class="col-md-1">Muatnaik Dok</div>
         <div class="col-md-11">
             <input type="file" name="doc" class="form-control">
+            <a href="{{url('doc/view/'.$doc->id)}}">{{$doc->doc_name}}</a>
         </div>
     </div>
     <div class="row">

@@ -33,7 +33,14 @@
         @foreach($docs as $doc)
         <tr>
             <!-- klik link ini, open/show doc -->
-            <td><a href="{{ url('edoc/doc/'.$doc->id) }}">{{ $doc->name }}</a></td>
+            <!--<td><a href="{{ url('storage/doc/'.$doc->hash_name) }}">{{ $doc->name }}</a></td>-->
+            <td><a href="{{ url('/doc/view/'.$doc->id) }}">{{ $doc->name }}</a></td>
+            @if (App\Models\Role::isPriv(1))
+            <td>
+                <a href="{{url('doc/edit/'.$doc->id)}}" class="fa fa-edit"></a>
+                <a href="{{url('doc/delete/'.$doc->id)}}" class="fa fa-trash"></a>
+            </td>
+            @endif
         </tr>
         @endforeach
     </tbody>

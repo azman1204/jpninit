@@ -41,8 +41,14 @@ Route::middleware(['auth'])->group(function() {
     // add new doc
     Route::get('/doc/form/{id_cat}', 'DocController@form');
     Route::post('/doc/save', 'DocController@save');
-    Route::get('/doc/edit/{$id}', 'DocController@edit');
-    Route::get('/doc/delete/{$id}', 'DocController@delete');
+    Route::get('/doc/edit/{id}', 'DocController@edit');
+    Route::get('/doc/delete/{id}', 'DocController@delete');
+    Route::get('/doc/view/{id}', 'DocController@view');
+    
+    // Staff Directory
+    Route::get('staff/search', 'StaffController@search');
+    Route::post('staff/search', 'StaffController@search');
+    Route::get('staff/view', 'StaffController@view');
 });
 
 Route::middleware(['web'])->group(function() {
