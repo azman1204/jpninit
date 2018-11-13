@@ -316,11 +316,8 @@
         <script type="text/javascript" src="{{asset('assets/plugins/jquery_visible/jquery.visible.min.js')}}"></script>
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <script type="text/javascript" src="{{asset('assets/js/misc/ie10-viewport-bug-workaround.js')}}"></script>
-
         <!-- SCRIPTS - REQUIRED END -->
-
         <!-- SCRIPTS - OPTIONAL START -->
-
         <!-- SCRIPTS - DEMO - START -->
         <!-- Image Placeholder -->
         <script type="text/javascript" src="{{asset('assets/js/misc/holder.min.js')}}"></script>
