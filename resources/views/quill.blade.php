@@ -305,7 +305,7 @@
         <script type="text/javascript" src="{{asset('assets/js/bootstrap/popper.min.js')}}"></script>
         <!-- Bootstrap core JavaScript -->
         <script type="text/javascript" src="{{asset('assets/js/bootstrap/bootstrap.min.js')}}"></script>
-        <!-- MDB core JavaScript -->
+        <!-- MDB core JavaScript --> 
         <script type="text/javascript" src="{{asset('assets/js/bootstrap/mdb.min.js')}}"></script>
         <!-- Velocity -->
         <script type="text/javascript" src="{{asset('assets/plugins/velocity/velocity.min.js')}}"></script>
