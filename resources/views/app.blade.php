@@ -43,7 +43,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{url('edoc/list')}}">
+                            <a class="nav-link active" href="{{url('home')}}">
+                                <i class="batch-icon batch-icon-home"></i>
+                                Utama
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url('edoc/list')}}">
                                 <i class="batch-icon batch-icon-star"></i>
                                 eDoc
                             </a>

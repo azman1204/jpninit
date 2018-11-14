@@ -59,15 +59,15 @@
                             <a class="signin-logo d-sm-none d-md-block" href="#">
                                 <img src="assets/img/logo-dark.png" width="145" height="32.3" alt="QuillPro">
                             </a>
-                            <form>
+                            <form method="post" action="{{ url('auth') }}">
+                                @csrf
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    <label for="exampleInputEmail1">ID Pengguna</label>
+                                    <input type="text" name="userid" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukkan ID Pengguna">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    <label for="exampleInputPassword1">Katalaluan</label>
+                                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Masukkan Katalaluan">
                                 </div>
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" class="custom-control-input" id="keep-signed-in">
@@ -75,12 +75,8 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-gradient btn-block">
                                     <i class="batch-icon batch-icon-key"></i>
-                                    Sign In
+                                    Log Masuk
                                 </button>
-                                <hr>
-                                <p class="text-center">
-                                    Don't Have An Account? <a href="sisu-signup.html">Sign Up here</a>
-                                </p>
                             </form>
                         </div>
                     </div>
