@@ -1,63 +1,60 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Models\Article;
+use App\Models\Room;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
-class ArticleController extends Controller
+class RoomController extends Controller
 {
-    // list
-    function listing() {
-        $arts = Article::all();
-        return view('article/list', compact('arts'));
+    // room/index
+    function index() {
+        $rooms = Room::all();
+        return view('forum/room/index', compact('rooms'));
     }
     
-    // form
-    function show() {
-        $art = new Article();
-        return view('article/form', compact('art'));
+    // room/create
+    function create() {
+        $room = new Room();
+        return view('forum/room/form', compact('room'));
     }
     
     // edit
     function edit($id) {
-        $art = Article::find($id);
-        return view('article/form', compact('art'));
+        $room = Room::find($id);
+        return view('forum/room/form', compact('room'));
     }
     
     // save
     function save(Request $req) {
         $id = $req->input('id');
-        $title = $req->input('title');
-        $content = $req->input('content');
-        $cat = $req->input('cat');
-        $created_by = Auth::user()->id;
         
         if (empty($id)) {
             // insert
-            $art = new Article();
+            $room = new Room();
+            $room->created_by = Auth::user()->id;
         } else {
             // update
-            $art = Article::find($id);
+            $room = Room::find($id);
         }
         
-        $art->title = $title;
-        $art->content = $content;
-        $art->cat = $cat;
-        $art->created_by = $created_by;
+        $room->title = $req->input('title');
+        $room->descr = $req->input('descr');
+
         // validation
-        $v = Validator::make($req->all(), Article::rules(), Article::messages());
+        $v = Validator::make($req->all(), Room::rules(), Room::messages());
         if ($v->fails()) {
-            return view('article/form', compact('art'))->withErrors($v);
+            return view('forum/room/form', compact('room'))->withErrors($v);
         }
         
-        $art->save();
-        return redirect('article/list');
+        $room->save();
+        return redirect('room/index');
     }
     
     
     // delete
     function delete($id) {
-        return redirect('article/list');
+        Room::find($id)->delete();
+        return redirect('room');
     }
 }

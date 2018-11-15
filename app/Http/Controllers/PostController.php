@@ -1,63 +1,60 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
-use App\Models\Article;
+use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
-class ArticleController extends Controller
-{
-    // list
-    function listing() {
-        $arts = Article::all();
-        return view('article/list', compact('arts'));
+class PostController extends Controller {
+    // list semua post
+    function index($room_id, Request $req) {
+        $req->session()->put('room_id', $room_id);
+        $posts = Post::where('room_id', $room_id)->get();
+        return view('forum/post/index', compact('posts'));
     }
-    
+
     // form
-    function show() {
-        $art = new Article();
-        return view('article/form', compact('art'));
+    function create() {
+        $post = new Post();
+        return view('forum/post/form', compact('post'));
     }
-    
+
     // edit
     function edit($id) {
-        $art = Article::find($id);
-        return view('article/form', compact('art'));
+        $post = Post::find($id);
+        return view('forum/post/form', compact('post'));
     }
-    
+
     // save
     function save(Request $req) {
-        $id = $req->input('id');
-        $title = $req->input('title');
-        $content = $req->input('content');
-        $cat = $req->input('cat');
-        $created_by = Auth::user()->id;
-        
-        if (empty($id)) {
+        if (empty($req->id)) {
             // insert
-            $art = new Article();
+            $post = new Post();
         } else {
             // update
-            $art = Article::find($id);
+            $post = Post::find($req->id);
         }
+
+        $post->content = $req->content;
+        $post->post_by = Auth::user()->id;
+        $post->room_id = $req->session()->get('room_id');
         
-        $art->title = $title;
-        $art->content = $content;
-        $art->cat = $cat;
-        $art->created_by = $created_by;
         // validation
-        $v = Validator::make($req->all(), Article::rules(), Article::messages());
+        $v = Validator::make($req->all(), Post::rules(), Post::messages());
         if ($v->fails()) {
-            return view('article/form', compact('art'))->withErrors($v);
+            return view('forum/post/form', compact('post'))->withErrors($v);
         }
-        
-        $art->save();
-        return redirect('article/list');
+
+        $post->save();
+        return redirect('post/index/'.$post->room_id);
     }
-    
-    
+
     // delete
     function delete($id) {
-        return redirect('article/list');
+        $post = Post::find($id);
+        $post->delete();
+        return redirect('post/index/'.$post->room_id);
     }
 }

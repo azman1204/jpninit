@@ -1,63 +1,59 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Models\Article;
+use App\Models\Reply;
+use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
-class ArticleController extends Controller
+class ReplyController extends Controller
 {
     // list
-    function listing() {
-        $arts = Article::all();
-        return view('article/list', compact('arts'));
+    function index($post_id, Request $req) {
+        $req->session()->put('post_id', $post_id);
+        $replies = Reply::where('post_id', $post_id)->get();
+        $post = Post::find($post_id);
+        return view('forum/reply/index', compact('replies','post'));
     }
     
     // form
-    function show() {
-        $art = new Article();
-        return view('article/form', compact('art'));
+    function create() {
+        $reply = new Reply();
+        return view('forum/reply/form', compact('reply'));
     }
     
     // edit
     function edit($id) {
-        $art = Article::find($id);
-        return view('article/form', compact('art'));
+        $reply = Reply::find($id);
+        return view('forum/reply/form', compact('reply'));
     }
     
     // save
     function save(Request $req) {
-        $id = $req->input('id');
-        $title = $req->input('title');
-        $content = $req->input('content');
-        $cat = $req->input('cat');
-        $created_by = Auth::user()->id;
-        
+        $id = $req->input('id');       
         if (empty($id)) {
-            // insert
-            $art = new Article();
+            $reply = new Reply();
         } else {
-            // update
-            $art = Article::find($id);
+            $reply = Reply::find($id);
         }
         
-        $art->title = $title;
-        $art->content = $content;
-        $art->cat = $cat;
-        $art->created_by = $created_by;
+        $reply->content = $req->content;
+        $reply->post_id = $req->session()->get('post_id');
+        $reply->reply_by = Auth::user()->id;
         // validation
-        $v = Validator::make($req->all(), Article::rules(), Article::messages());
+        $v = Validator::make($req->all(), Reply::rules(), Reply::messages());
         if ($v->fails()) {
-            return view('article/form', compact('art'))->withErrors($v);
+            return view('forum/reply/form', compact('reply'))->withErrors($v);
         }
         
-        $art->save();
-        return redirect('article/list');
+        $reply->save();
+        return redirect('reply/index/'.$reply->post_id);
     }
-    
     
     // delete
     function delete($id) {
-        return redirect('article/list');
+        $reply = Reply::find($id);
+        $reply->delete();
+        return redirect('reply/index/'.$reply->post_id);
     }
 }

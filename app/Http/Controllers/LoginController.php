@@ -7,6 +7,8 @@ use App\Models\User;
 use Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Pengguna;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller {
     // login form
@@ -16,6 +18,10 @@ class LoginController extends Controller {
 
     // log out
     function logout() {
+        DB::connection('mysql2')
+                ->table('sso')
+                ->where('user_id',Auth::user()->id)
+                ->delete();
         Auth::logout();
         return redirect('login');
     }
@@ -26,6 +32,12 @@ class LoginController extends Controller {
         $password = $req->input('password');
         if(Auth::attempt(['userid' => $userid, 'password' => $password])) {
             // auth success
+            $hash = Hash::make(date('Y-m-d H:i:s'));
+            $hash = str_replace('/', '', $hash);
+            DB::connection('mysql2')->table('sso')->insert([
+                'user_id' => Auth::user()->id,
+                'session_id' => $hash
+            ]);
             return redirect('home');
         } else {
             // auth fail

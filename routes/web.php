@@ -20,7 +20,14 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/article/delete/{id}', 'ArticleController@delete');
     //Route::view('home', 'login.home');
     Route::get('home', function() {
-        return view('login.home', ['user' => Auth::user()]);
+        $sso = DB::connection('mysql2')
+                ->table('sso')
+                ->where('user_id', Auth::user()->id)
+                ->first();
+        $sess = $sso->session_id;
+        return view('login.home', [
+            'user' => Auth::user(),
+            'sess' => $sess]);
     });
     Route::get('/todo/list', 'TodoController@listing');
     Route::get('/todo/show', 'TodoController@show');
@@ -49,6 +56,25 @@ Route::middleware(['auth'])->group(function() {
     Route::get('staff/search', 'StaffController@search');
     Route::post('staff/search', 'StaffController@search');
     Route::get('staff/view', 'StaffController@view');
+    
+    // Forum Room
+    Route::get('room/index', 'RoomController@index');
+    Route::get('room/create', 'RoomController@create');
+    Route::post('room/save', 'RoomController@save');
+    Route::get('room/edit/{id}', 'RoomController@edit');
+    Route::get('room/delete/{id}', 'RoomController@delete');
+    // Forum Post
+    Route::get('post/index/{room_id}', 'PostController@index');
+    Route::get('post/create', 'PostController@create');
+    Route::post('post/save', 'PostController@save');
+    Route::get('post/edit/{id}', 'PostController@edit');
+    Route::get('post/delete/{id}', 'PostController@delete');
+    // Forum Reply
+    Route::get('reply/index/{post_id}', 'ReplyController@index');
+    Route::get('reply/create', 'ReplyController@create');
+    Route::post('reply/save', 'ReplyController@save');
+    Route::get('reply/edit/{id}', 'ReplyController@edit');
+    Route::get('reply/delete/{id}', 'ReplyController@delete');
 });
 
 Route::middleware(['web'])->group(function() {

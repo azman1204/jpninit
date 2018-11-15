@@ -1,6 +1,10 @@
 @extends('app')
+
+@section('title')
+Senarai E-Dokumen
+@endsection
+
 @section('content')
-<legend>Senarai E-Dokumen</legend>
 
 @if ((count($cats) == 0 && count($docs) == 0) || count($cats) > 0)
     <!-- belum ada folder dan belum ada doc OR sudah ada folder -->

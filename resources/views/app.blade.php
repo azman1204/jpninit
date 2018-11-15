@@ -67,7 +67,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{url('forum/room')}}">
+                            <a class="nav-link" href="{{url('room/index')}}">
                                 <i class="batch-icon batch-icon-arrow-left"></i>
                                 Forum
                             </a>
@@ -286,7 +286,7 @@
                         <div class="row mb-4">
                             <div class="col-md-12">
                                 <div class="card">
-                                    <div class="card-header">What is this?</div>
+                                    <div class="card-header">@yield('title')</div>
                                     <div class="card-body">
                                         @yield('content')
                                     </div>

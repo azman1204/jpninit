@@ -1,35 +1,20 @@
 @extends('app')
 @section('content')
-<legend>Artikel</legend>
-@if (count($errors) > 0)
-<div class="alert alert-danger">
-    There are some problems... <br>
-    <ul>
-        @foreach($errors->all() as $err)
-        <li>{{ $err }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
-<form method="post" action="{{ url('article/save') }}">
-    <input type="hidden" name="id" value="{{ $art->id }}">
+@section('title') Tambah Kategori @endsection
+@include('include.err')
+<form method="post" action="{{ url('room/save') }}">
+    <input type="hidden" name="id" value="{{ $room->id }}">
     @csrf
     <div class="row">
         <div class="col-md-1">Tajuk</div>
         <div class="col-md-4">
-            <input value="{{ $art->title }}" type="text" name="title" class="form-control">
+            <input value="{{ $room->title }}" type="text" name="title" class="form-control">
         </div>
     </div>
     <div class="row">
         <div class="col-md-1">Kandungan</div>
         <div class="col-md-11">
-            <textarea id="editor" name="content">{{ $art->content }}</textarea>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-1">Kategori</div>
-        <div class="col-md-11">
-            {!! App\Models\Ref::dropdown('cms', 'cat', $art->cat) !!}
+            <textarea id="editor" name="descr" class="form-control">{{ $room->descr }}</textarea>
         </div>
     </div>
     <div class="row">
@@ -39,19 +24,4 @@
         </div>
     </div>
 </form>
-<script src="https://cdn.ckeditor.com/ckeditor5/11.1.1/classic/ckeditor.js"></script>
-<script>
-    ClassicEditor
-        .create( document.querySelector( '#editor' ) )
-        .catch( error => {
-            console.error( error );
-        } );
-</script>
-
-<style>
-.ck-editor__editable {
-    min-height: 200px;
-}
-</style>
-
 @endsection
